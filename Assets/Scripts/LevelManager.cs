@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameObject _inGameScreen, _endLevelScreen;
     bool noObjectLeft = false;
     int countObject = 0;
+    PlaneController planeController;
+    bool _dead = false;
     void Start()
     {
         
@@ -16,9 +18,15 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //_dead = planeController.isDead;
         CheckObjects();
         if(noObjectLeft)
             EndLevel();
+        if (_dead)
+        {
+            Debug.Log("isDead");
+            EndLevel();
+        }
     }
 
     public void CheckObjects()

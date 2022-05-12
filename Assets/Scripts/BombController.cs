@@ -24,7 +24,7 @@ public class BombController : MonoBehaviour
         foreach (Collider nearBy in colliders)
         {
             Rigidbody nearRB = nearBy.GetComponent<Rigidbody>();
-            if (nearRB != null)
+            if (nearRB != null && !(nearRB.gameObject.CompareTag("Player")) && !(nearRB.gameObject.CompareTag("Bomb")))
             {
                 nearRB.AddExplosionForce(_expForce, transform.position, _radius);
             }

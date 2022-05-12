@@ -8,6 +8,7 @@ TagManager:
   - Platform
   - Object
   - SecondCam
+  - Bomb
   layers:
   - Default
   - TransparentFX

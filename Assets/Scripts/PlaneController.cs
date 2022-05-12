@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlaneController : MonoBehaviour
 {
     Rigidbody _rb;
+    public bool isDead = false;
     [SerializeField] float speed;
     [SerializeField] GameObject _bomb;
     [SerializeField] Transform _muzzle;
@@ -99,5 +100,9 @@ public class PlaneController : MonoBehaviour
         {
             transform.Rotate(0, 0, -30 * Time.deltaTime);
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Time.timeScale = 0;
     }
 }

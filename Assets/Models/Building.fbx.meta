@@ -3,7 +3,52 @@ guid: 1b5f9c54183b9e34bbdb17e81a2a3e8e
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bina1
+    second: {fileID: 2100000, guid: 563449ec9e7607344b655965b950300d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bina2
+    second: {fileID: 2100000, guid: 1d0325fb46e78ad4197cc44de556df2f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cam.001
+    second: {fileID: 2100000, guid: d0c36838fc6110947b5e88e46d505c80, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cam2
+    second: {fileID: 2100000, guid: 4bcc0f59f49205241875afc13b5d1445, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cerceve
+    second: {fileID: 2100000, guid: 306d0cf1fb4a4b04cb8ea43cff2ebc7e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kapi
+    second: {fileID: 2100000, guid: e213655313e97db4ba6ece12bbb29d61, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mermer
+    second: {fileID: 2100000, guid: 51e29d46771035b4989c5e3089657330, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal1
+    second: {fileID: 2100000, guid: ae4bc08c3fcbbd44d9e718f442642eb5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal2
+    second: {fileID: 2100000, guid: 707d0cc59dbbd6445b761b81bc62d040, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
