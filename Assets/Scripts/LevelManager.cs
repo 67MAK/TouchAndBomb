@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public static LevelManager Instance;
+
     [SerializeField] GameObject[] _objects;
-    [SerializeField] GameObject _inGameScreen, _endLevelScreen;
+    [SerializeField] GameObject playerPlane, explosionEffect, inGameScreen, endLevelScreen, isDeadScreen;
     bool noObjectLeft = false;
     int countObject = 0;
-    PlaneController planeController;
-    bool _dead = false;
+    public bool isDead = false;
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        //_dead = planeController.isDead;
-        CheckObjects();
-        if(noObjectLeft)
-            EndLevel();
-        if (_dead)
-        {
-            Debug.Log("isDead");
-            EndLevel();
-        }
+        LevelCalculator.Instance.PushScore();
     }
 
     public void CheckObjects()
@@ -38,9 +39,11 @@ public class LevelManager : MonoBehaviour
                 countObject++;
             }
         }
-        if(countObject == 0)
+        Debug.Log("Object Left : " + countObject);
+        if (countObject <= 1)
         {
             noObjectLeft = true;
+            EndLevel();
         }
         else
         {
@@ -49,8 +52,20 @@ public class LevelManager : MonoBehaviour
     }
     void EndLevel()
     {
-        _inGameScreen.SetActive(false);
-        _endLevelScreen.SetActive(true);
+        inGameScreen.SetActive(false);
+        endLevelScreen.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    public void IsDeadProcess()
+    {
+        GameObject _exp = Instantiate(explosionEffect, playerPlane.transform.position, Quaternion.identity);
+        Destroy(_exp, 3);
+        isDeadScreen.SetActive(true);
+        inGameScreen.SetActive(false);
+        CameraController.Instance.CamBehavWhenDead();
+        playerPlane.GetComponent<PlaneController>().enabled = false;
+        playerPlane.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        playerPlane.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
     }
 }

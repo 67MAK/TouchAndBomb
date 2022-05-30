@@ -4,23 +4,34 @@ using UnityEngine;
 
 public class PlaneController : MonoBehaviour
 {
+    public static PlaneController Instance;
     Rigidbody _rb;
     public bool isDead = false;
     [SerializeField] float speed;
     [SerializeField] GameObject _bomb;
     [SerializeField] Transform _muzzle;
-    bool _gameStarted = true, boost = false;
+    bool _gameStarted = false, boost = false;
     bool turnLeft, turnRight;
     [SerializeField] Joystick _joystick;
     float horizontalMove = 0f, verticalMove = 0f;
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     void Start()
     {
+        Time.timeScale = 0f;
         _rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        if (_gameStarted)
+        if (_gameStarted && !isDead)
         {
             TurnableMoveManager();
             if (boost) _rb.velocity = transform.forward * 2 * Time.deltaTime * speed;
@@ -52,41 +63,52 @@ public class PlaneController : MonoBehaviour
         {
             Instantiate(_bomb, _muzzle.transform.position, Quaternion.identity);
         }*/
+        
         //Boost
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        
+        /*if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             boost = true;
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             boost = false;
-        }
+        }*/
     }
 
     public void instantBomb()
     {
-        if (!_gameStarted) _gameStarted = true;
-        Instantiate(_bomb, _muzzle.transform.position, Quaternion.identity);
+        if (!_gameStarted)
+        {
+            Time.timeScale = 1f;
+            _gameStarted = true;
+        }
+        else
+        {
+            LevelCalculator.Instance.usedBombCount++;
+            LevelCalculator.Instance.score -= 10f;
+            Instantiate(_bomb, _muzzle.transform.position, Quaternion.identity);
+        }
+
     }
     public void PointerDownLeft()
     {
-        if (!_gameStarted) _gameStarted = true;
+ 
         turnLeft = true;
     }
     public void PointerUpLeft()
     {
-        if (!_gameStarted) _gameStarted = true;
+ 
         turnLeft = false;
     }
 
     public void PointerDownRight()
     {
-        if (!_gameStarted) _gameStarted = true;
+
         turnRight = true;
     }
     public void PointerUpRight()
     {
-        if (!_gameStarted) _gameStarted = true;
         turnRight = false;
     }
     public void TurnableMoveManager()
@@ -103,6 +125,6 @@ public class PlaneController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Time.timeScale = 0;
+        LevelManager.Instance.IsDeadProcess(); 
     }
 }
