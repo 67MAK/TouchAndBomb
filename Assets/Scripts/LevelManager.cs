@@ -7,8 +7,8 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
 
     [SerializeField] GameObject[] _objects;
-    [SerializeField] GameObject playerPlane, explosionEffect, inGameScreen, endLevelScreen, isDeadScreen;
-    bool noObjectLeft = false;
+    [SerializeField] GameObject playerPlane, explosionEffect, inGameScreen, endLevelScreen, isDeadScreen, pauseScreen;
+    [SerializeField] public GameObject pauseButton;
     int countObject = 0;
     public bool isDead = false;
 
@@ -42,7 +42,6 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Object Left : " + countObject);
         if (countObject <= 1)
         {
-            noObjectLeft = true;
             EndLevel();
         }
         else
@@ -54,9 +53,21 @@ public class LevelManager : MonoBehaviour
     {
         inGameScreen.SetActive(false);
         endLevelScreen.SetActive(true);
+        LevelCalculator.Instance.PushEndGameText();
         Time.timeScale = 0;
     }
-
+    public void PauseGameProcess()
+    {
+        inGameScreen.SetActive(false);
+        pauseScreen.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    public void ContinueGame()
+    {
+        inGameScreen.SetActive(true);
+        pauseScreen.SetActive(false);
+        Time.timeScale = 1f;
+    }
     public void IsDeadProcess()
     {
         GameObject _exp = Instantiate(explosionEffect, playerPlane.transform.position, Quaternion.identity);

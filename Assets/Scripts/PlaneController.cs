@@ -8,9 +8,10 @@ public class PlaneController : MonoBehaviour
     Rigidbody _rb;
     public bool isDead = false;
     [SerializeField] float speed;
-    [SerializeField] GameObject _bomb;
+    [SerializeField] GameObject _bomb, howToStartTextObj;
     [SerializeField] Transform _muzzle;
     bool _gameStarted = false, boost = false;
+    //public bool gamePaused;
     bool turnLeft, turnRight;
     [SerializeField] Joystick _joystick;
     float horizontalMove = 0f, verticalMove = 0f;
@@ -80,6 +81,8 @@ public class PlaneController : MonoBehaviour
     {
         if (!_gameStarted)
         {
+            howToStartTextObj.SetActive(false);
+            LevelManager.Instance.pauseButton.SetActive(true);
             Time.timeScale = 1f;
             _gameStarted = true;
         }

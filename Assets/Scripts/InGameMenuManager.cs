@@ -21,7 +21,14 @@ public class InGameMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
+    public void ContinueButton()
+    {
+        LevelManager.Instance.ContinueGame();
+    }
+    public void PauseButton()
+    {
+        LevelManager.Instance.PauseGameProcess();
+    }
     public void MainMenuButton()
     {
         SceneManager.LoadScene(0);
