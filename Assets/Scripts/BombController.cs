@@ -11,7 +11,7 @@ public class BombController : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Object"))
         {
             GameObject _exp = Instantiate(_explosion, transform.position, Quaternion.identity);
-            Destroy(_exp, 3);
+            Destroy(_exp, 4f);
             expEffect();
             Destroy(gameObject);
         }
