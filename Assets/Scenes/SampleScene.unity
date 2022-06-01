@@ -6959,7 +6959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  speed: 1800
+  speed: 700
   _bomb: {fileID: 497250578814222159, guid: cbf27290d9d64a44fae0f45e2f99d7d1, type: 3}
   howToStartTextObj: {fileID: 723707868}
   _muzzle: {fileID: 2135418035}

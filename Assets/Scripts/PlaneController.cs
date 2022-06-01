@@ -30,17 +30,16 @@ public class PlaneController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (_gameStarted && !isDead)
         {
             TurnableMoveManager();
-            if (boost) _rb.velocity = transform.forward * 2 * Time.deltaTime * speed;
-            else _rb.velocity = transform.forward * Time.deltaTime * speed;
+            _rb.velocity = transform.forward * Time.fixedDeltaTime * speed;
             horizontalMove = _joystick.Horizontal * 60;
             verticalMove = _joystick.Vertical * -50;
-            transform.Rotate(0, horizontalMove * Time.deltaTime, 0);
-            transform.Rotate(verticalMove * Time.deltaTime, 0, 0);
+            transform.Rotate(0, horizontalMove * Time.fixedDeltaTime, 0);
+            transform.Rotate(verticalMove * Time.fixedDeltaTime, 0, 0);
         }
 
         /*if (Input.GetKeyDown(KeyCode.W))
@@ -53,11 +52,11 @@ public class PlaneController : MonoBehaviour
         //Rotation Turn
         /*if (Input.GetKey(KeyCode.E))
         {
-            transform.Rotate(0, 0, -30 * Time.deltaTime);
+            transform.Rotate(0, 0, -30 * Time.fixedDeltaTime);
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            transform.Rotate(0, 0, 30 * Time.deltaTime);
+            transform.Rotate(0, 0, 30 * Time.fixedDeltaTime);
         }*/
         //Bombing
         /*if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -119,11 +118,11 @@ public class PlaneController : MonoBehaviour
         if (!_gameStarted) _gameStarted = true;
         if (turnLeft)
         {
-            transform.Rotate(0, 0, 30 * Time.deltaTime);
+            transform.Rotate(0, 0, 30 * Time.fixedDeltaTime);
         }
         else if (turnRight)
         {
-            transform.Rotate(0, 0, -30 * Time.deltaTime);
+            transform.Rotate(0, 0, -30 * Time.fixedDeltaTime);
         }
     }
     private void OnCollisionEnter(Collision collision)
